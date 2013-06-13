@@ -1,0 +1,9 @@
+<% for playlist in current_user.playlists %>
+	<% if playlist.where(:cur_play => true).first != nil %>
+		<% playlist.where(:cur_play => true).first.videos.each do |video| %>
+			<% if video.where(:cur_vid => true).first != nil %>
+				<%= video.embed %>
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>

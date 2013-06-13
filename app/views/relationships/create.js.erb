@@ -1,0 +1,3 @@
+$("#follow_form").html("<%= j(render('users/unfollow')) %>")
+$("#followers").html('<%= @user.followers.count %>')
+$("#other_playlists").html("<%= j(render('shared/view_other_lists')) %>")

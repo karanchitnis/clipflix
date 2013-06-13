@@ -1,0 +1,26 @@
+<% other_vids.each do |video| %>
+	<%= link_to image_tag(video.thumbnail, :size => "35x35"), set_main_vid_path(:id => video.id), :remote => true %>
+	<%= video.title %>
+	</br>
+	<%= link_to "Add To Playlist", "#", :id => "toggle_add_#{video.id}", :divid => "toggle_addvid_#{video.id}", :class => "toggle_vid" %>
+
+	<div id="toggle_addvid_<%= video.id %>" divid="divID<%= video.id %>" class="toggle_add" style="display:none;">
+	<% current_user.playlists.each do |playlist| %>
+  		<%= button_to playlist.name, transfer_vid_path(:vidid => video.id, :playid => playlist.id), :remote => true %>
+	<% end %>
+	</div>
+<% end %>
+
+<!-- <script>
+//$("#toggle_add").click(function() { 
+//    $("#add_lists").toggle();
+//});
+</script> -->
+<script>
+    $(document).ready(function() {
+  	  	$('.toggle_vid').click(function() {
+  	  		var divId = $(this).attr('divid');
+        	$("#" + divId).toggle();
+  	  	});
+  	});
+</script>

@@ -1,0 +1,4 @@
+<% if @user.playlists.any? %> 
+    Playlists: <%= @user.playlists.count %>
+<% end %>
+Videos: <%= @user.num_vids %>

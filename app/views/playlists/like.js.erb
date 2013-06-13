@@ -1,0 +1,3 @@
+$("#all_playlists").html("<%= j(render(:partial => "index")) %>");
+$("#other_playlists").html("<%= j(render(:partial => "shared/view_other_lists", :locals => {:@user => @user})) %>");
+$("#play_search_results").html("<%= j(render(:partial => "search_results", :locals => {:@playlists => @playlists, :@isprelist => @isprelist})) %>");

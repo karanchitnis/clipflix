@@ -1,0 +1,23 @@
+<script src="assets/pagination.js"></script>
+
+<div id="play_search_results">
+<% if @isprelist == false %> 
+	<%= will_paginate @playlists %>
+	<% @playlists.order("position").each do |playlist| %>
+		<%= playlist.likes.size %>
+	    <%= link_to "Likes", like_path(:id => playlist.id), :remote => true %>
+	    <%= playlist.dislikes.size %>
+	    <%= link_to "Dislikes", dislike_path(:id => playlist.id), :remote => true %>
+		<%= link_to playlist.name, display_other_vids_path(:id => playlist.id), :remote => true %>
+		<%= link_to "Add", transfer_list_path(:id => playlist.id), :remote => true %>
+		</br>
+	<% end %>
+<% else %>
+	<%#= @playlists.likes.size %>
+	<%#= link_to "Likes", like_path(:id => @playlists.id), :remote => true %>
+	<%#= @playlists.dislikes.size %>
+	<%#= link_to "Dislikes", dislike_path(:id => @playlists.id), :remote => true %>
+	<%= link_to @playlists.name, display_other_vids_path(:id => @playlists.id), :remote => true %>
+	<%= link_to "Add", transfer_list_path(:id => @playlists.id), :remote => true %>
+<% end %>
+</div>

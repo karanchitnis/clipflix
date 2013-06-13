@@ -1,0 +1,32 @@
+<script src="assets/sort.js"></script>
+
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= @user.name %>
+      </h1>
+    </section>
+    <section>
+      <%= render 'shared/stats' %>
+    </section>
+  </aside>
+  <div class="span8">
+    <%= render 'follow_form' if signed_in? %>
+
+  <%= render 'shared/view_other_lists' %>
+<div id="main_vid_title"></div>
+<div class="span4" id="main_vid"></div>
+<div id="other_list_content"></div>
+  <%= render 'playlists/new' %>
+<div id="my_playlist">
+  <%= render 'playlists/index' %>
+</div>
+<div id="suggestions"></div>
+<div id="list_content">
+  <%= render 'shared/init_list' %>
+</div>
+
+  </div>
+</div>

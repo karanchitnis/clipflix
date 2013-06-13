@@ -1,0 +1,45 @@
+<script src="assets/sort.js"></script>
+
+<script>
+	var sug_toggle = document.getElementById("suggestions")
+		sug_toggle.style.display = 'none';
+	var list_toggle = document.getElementById("list_content")
+		list_toggle.style.display = 'inline';
+</script>
+
+<ul id="playlist_vids" data-update-url="<%= sort_videos_url(:id => cur_playlist.id) %>">
+  <% cur_playlist.videos.order("position").each do |video| %>
+    <%= content_tag_for :div, video do %>
+      <%#= video.cur_vid %>
+	  <%= link_to image_tag(video.thumbnail, :size => "35x35"), set_main_vid_path(:id => video.id), :remote => true %>
+	  <%= video.title %>
+	  <%#= video.provider %>
+    <div id="mod_vid">
+	  <%= link_to "<i class='icon-pencil'></i>".html_safe, "#", :id => "edit_link_#{video.id}", :divid => "edit_video_#{video.id}", :class => "edit_link", :remote => true %>
+    <%= link_to "<i class='icon-remove'></i>".html_safe, delete_vid_path(:id => video.id), :remote => true %>
+    <br/>
+    </div>
+
+<div id="edit_video_<%= video.id %>" divid="divId<%= video.id %>"class="edit_vid" style="display:none;">
+<%= form_for(:video, :url => update_vid_path(:id => video.id), :remote => true) do |f| %>
+  <div class="field">
+    <%= text_field_tag :name, nil, :placeholder => "Change Name of Video" %>
+    <%= f.submit 'Submit', class: "btn" %>
+  </div>
+<% end %>
+</div>
+	  
+  <% end %>
+  	<% end %>
+</ul>
+
+
+<script>
+
+    $(document).ready(function() {
+  	  	$('.edit_link').click(function() {
+  	  		var divId = $(this).attr('divid');
+        	$("#" + divId).toggle();
+  	  	});
+  	});
+</script>

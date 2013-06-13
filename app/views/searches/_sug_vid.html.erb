@@ -1,0 +1,13 @@
+<% if @init_chars == "y:" %>
+  <iframe width=<%= width %> height=<%= height %> src=<%= url %> frameborder="0" allowfullscreen></iframe>
+<% elsif @init_chars == "v:" %>
+  <iframe src=<%= url %> width=<%= width %> height=<%= height %> frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+<% elsif @init_chars == "m:" %>
+  <iframe src=<%= url %>  width=<%= width %> height=<%= height %> allowFullScreen frameborder=0></iframe>
+<% elsif @init_chars == "s:" %>
+  <embed src=<%= url %> width=<%= width %> height=<%= height %> allowFullScreen="true" type="application/x-shockwave-flash" wmode="transparent" allowScriptAccess="always"></embed>
+<% elsif @init_chars == "e:" %>
+  <embed src=<%= url %> type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width=<%= width %> height=<%= height %> id="veohFlashPlayerEmbed" name="veohFlashPlayerEmbed"></embed>
+<%# elsif @init_chars == "u:" %>
+<!--iframe width="480" height="384" src=<%= url %> scrolling="no" frameborder="0" style="border: 0px none transparent;"></iframe> -->
+<% end %>

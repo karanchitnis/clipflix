@@ -1,0 +1,53 @@
+<head>
+<script>var switchTo5x=true;</script>
+<script src="http://w.sharethis.com/button/buttons.js"></script>
+<script>stLight.options({publisher: "4f4616df-2d9a-4902-a8a8-6032edfbc1e3", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+</head>
+
+<div id="vid_items" style="display:none;">
+
+<%= link_to download_path, :remote => true do %>
+	<span id="download"> Download </span>
+<% end %>
+<%= link_to "#", :id => "share", :remote => true do %>
+	<span id="sharebuts"> Share </span>
+<% end %>
+<%= link_to "#", :id => "toggle_add", :remote => true do %>
+	<span id="addtolist"> Add to Playlist </span>
+<% end %>
+
+<div id="add_lists" style="display:none;">
+<% current_user.playlists.each do |playlist| %>
+
+  <%= button_to playlist.name, search_to_list_path(:id => playlist.id), :remote => true %>
+
+<% end %>
+</div>
+
+</div>
+
+<div id="share_buttons" style="display:none;">
+
+<span class='st_facebook_large' displayText='Facebook'></span>
+<span class='st_twitter_large' displayText='Tweet'></span>
+<span class='st_googleplus_large' displayText='Google +'></span>
+<span class='st_tumblr_large' displayText='Tumblr'></span>
+<span class='st_pinterest_large' displayText='Pinterest'></span>
+<span class='st_reddit_large' displayText='Reddit'></span>
+<span class='st_blogger_large' displayText='Blogger'></span>
+<span class='st_stumbleupon_large' displayText='StumbleUpon'></span>
+<span class='st_linkedin_large' displayText='LinkedIn'></span>
+<span class='st_myspace_large' displayText='MySpace'></span>
+<span class='st_email_large' displayText='Email'></span>
+
+</div>
+
+<script>
+$("#share").click(function() { 
+    $("#share_buttons").toggle();
+});
+
+$("#toggle_add").click(function() {
+	$("#add_lists").toggle();
+});
+</script>

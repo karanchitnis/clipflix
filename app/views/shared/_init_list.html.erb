@@ -1,0 +1,3 @@
+<% if current_user.playlists.where(:cur_play => true).first != nil %>
+	<%= render :partial => "videos/index", :locals => {:cur_playlist => current_user.playlists.where(:cur_play => true).first} %>
+<% end %>

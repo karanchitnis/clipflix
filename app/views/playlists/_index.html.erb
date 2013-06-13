@@ -1,0 +1,47 @@
+<script src="assets/sort.js"></script>
+
+<ul id="all_playlists" data-update-url="<%= sort_playlists_url %>">
+  <% current_user.playlists.order("position").each do |playlist| %>
+    <%= content_tag_for :div, playlist do %>
+      <%= playlist.likes.size %>
+      <%#= link_to "Likes", like_path(:id => playlist.id), :remote => true %>
+
+      <%= link_to "<i class='icon-arrow-up icon-green'></i>".html_safe, like_path(:id => playlist.id), :remote => true %>
+
+      <%= playlist.dislikes.size %>
+      <%#= link_to "Dislikes", dislike_path(:id => playlist.id), :remote => true %>
+
+      <%= link_to "<i class='icon-arrow-down icon-red'></i>".html_safe, dislike_path(:id => playlist.id), :remote => true %>
+
+      <%#= playlist.privacy %>
+      <%= link_to playlist.name, display_list_vids_path(:id => playlist.id), :remote => true %>
+      <div id="mod_list">
+      
+      <%= link_to "<i class='icon-pencil'></i>".html_safe, "#", :id => "edit_link_#{playlist.id}", :divid => "edit_playlist_#{playlist.id}", :class => "edit_list", :remote => true %>
+
+      <%= link_to "<i class='icon-remove'></i>".html_safe, playlist, :method => :delete, data: { confirm: 'Are you sure?' }, :remote => true %>
+      <br/>
+      </div>
+
+<div id="edit_playlist_<%= playlist.id %>" divid="divId<%= playlist.id %>"class="edit_play" style="display:none;">
+<%= form_for(:playlist, :url => update_play_path(:id => playlist.id), :remote => true) do |f| %>
+  <div class="field">
+    <%= text_field_tag :name, playlist.name %>
+    <%= select_tag(:privacy,options_for_select([["Public"], ["Only Friends"], ["Private"]], playlist.privacy))%>
+    <%= f.submit 'Submit', class: "btn" %>
+  </div>
+<% end %>
+      </div>
+
+    <% end %>
+  <% end %>
+</ul>
+
+<script>
+    $(document).ready(function() {
+  	  	$('.edit_list').click(function() {
+  	  		var divId = $(this).attr('divid');
+        	$("#" + divId).toggle();
+  	  	});
+  	});
+</script>
