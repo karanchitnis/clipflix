@@ -1,5 +1,5 @@
 class Playlist < ActiveRecord::Base
-  attr_accessible :cur_play, :name, :position, :privacy, :isprelist
+  attr_accessible :cur_play, :name, :position, :privacy
   belongs_to :user
   has_many :videos
   acts_as_list

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130603072917) do
+ActiveRecord::Schema.define(:version => 20130614233723) do
 
   create_table "microposts", :force => true do |t|
     t.string   "content"
@@ -34,7 +34,6 @@ ActiveRecord::Schema.define(:version => 20130603072917) do
     t.integer  "cached_votes_score", :default => 0
     t.integer  "cached_votes_up",    :default => 0
     t.integer  "cached_votes_down",  :default => 0
-    t.boolean  "isprelist",          :default => false
   end
 
   add_index "playlists", ["cached_votes_down"], :name => "index_playlists_on_cached_votes_down"
@@ -118,9 +117,12 @@ ActiveRecord::Schema.define(:version => 20130603072917) do
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
     t.boolean  "cur_vid",     :default => false
+    t.integer  "user_id"
+    t.string   "norm_url"
   end
 
   add_index "videos", ["playlist_id", "created_at"], :name => "index_videos_on_playlist_id_and_created_at"
+  add_index "videos", ["user_id"], :name => "index_videos_on_user_id"
 
   create_table "votes", :force => true do |t|
     t.integer  "votable_id"

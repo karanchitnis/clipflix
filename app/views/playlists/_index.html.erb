@@ -3,25 +3,34 @@
 <ul id="all_playlists" data-update-url="<%= sort_playlists_url %>">
   <% current_user.playlists.order("position").each do |playlist| %>
     <%= content_tag_for :div, playlist do %>
-      <%= playlist.likes.size %>
-      <%#= link_to "Likes", like_path(:id => playlist.id), :remote => true %>
+    <table>
+      <tr>
+      <td> <%= playlist.likes.size %> </td>
 
-      <%= link_to "<i class='icon-arrow-up icon-green'></i>".html_safe, like_path(:id => playlist.id), :remote => true %>
+      <td> 
+        <%= link_to "<i class='icon-arrow-up'></i>".html_safe, like_path(:id => playlist.id), :remote => true %> 
+      </td>
 
-      <%= playlist.dislikes.size %>
-      <%#= link_to "Dislikes", dislike_path(:id => playlist.id), :remote => true %>
-
-      <%= link_to "<i class='icon-arrow-down icon-red'></i>".html_safe, dislike_path(:id => playlist.id), :remote => true %>
-
-      <%#= playlist.privacy %>
-      <%= link_to playlist.name, display_list_vids_path(:id => playlist.id), :remote => true %>
-      <div id="mod_list">
+      <td> <%= playlist.dislikes.size %> </td>
       
-      <%= link_to "<i class='icon-pencil'></i>".html_safe, "#", :id => "edit_link_#{playlist.id}", :divid => "edit_playlist_#{playlist.id}", :class => "edit_list", :remote => true %>
+      <td> 
+        <%= link_to "<i class='icon-arrow-down icon-red'></i>".html_safe, dislike_path(:id => playlist.id), :remote => true %> 
+      </td>
+      
+      <td>
+        <%= link_to playlist.name, display_list_vids_path(:id => playlist.id), :remote => true %> 
+      </td>
 
-      <%= link_to "<i class='icon-remove'></i>".html_safe, playlist, :method => :delete, data: { confirm: 'Are you sure?' }, :remote => true %>
-      <br/>
-      </div>
+      <span id="mod_list">
+      
+      <%#= link_to "<i class='icon-pencil'></i>".html_safe, "#", :id => "edit_link_#{playlist.id}", :divid => "edit_playlist_#{playlist.id}", :class => "edit_list", :remote => true %>
+      <%= link_to image_tag("edit.png"), "#", :id => "edit_link_#{playlist.id}", :divid => "edit_playlist_#{playlist.id}", :class => "edit_list", :remote => true %>
+      <%#= link_to "<i class='icon-remove'></i>".html_safe, playlist, :method => :delete, data: { confirm: 'Are you sure?' }, :remote => true %>
+      <%= link_to image_tag("delete.png"), playlist, :method => :delete, data: { confirm: 'Are you sure?' }, :remote => true %>
+
+      </span>
+    </tr>
+    </table>
 
 <div id="edit_playlist_<%= playlist.id %>" divid="divId<%= playlist.id %>"class="edit_play" style="display:none;">
 <%= form_for(:playlist, :url => update_play_path(:id => playlist.id), :remote => true) do |f| %>
@@ -32,7 +41,6 @@
   </div>
 <% end %>
       </div>
-
     <% end %>
   <% end %>
 </ul>

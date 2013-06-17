@@ -20,6 +20,24 @@ SampleApp::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # Don't care if the mailer can't send
+  config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.perform_deliveries = true
+
+  # set delivery method to :smtp, :sendmail or :test
+  config.action_mailer.delivery_method = :smtp
+
+  # these options are only needed if you choose smtp delivery
+  config.action_mailer.smtp_settings = {
+  :address              => "smtp.gmail.com",
+  :port                 => 587,
+  :domain               => 'gmail.com',
+  :user_name            => 'notifytester@gmail.com',
+  :password             => 'notifytester123',
+  :authentication       => 'plain',
+  :enable_starttls_auto => true  }
+
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 

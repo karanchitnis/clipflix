@@ -13,10 +13,6 @@
 		</br>
 	<% end %>
 <% else %>
-	<%#= @playlists.likes.size %>
-	<%#= link_to "Likes", like_path(:id => @playlists.id), :remote => true %>
-	<%#= @playlists.dislikes.size %>
-	<%#= link_to "Dislikes", dislike_path(:id => @playlists.id), :remote => true %>
 	<%= link_to @playlists.name, display_other_vids_path(:id => @playlists.id), :remote => true %>
 	<%= link_to "Add", transfer_list_path(:id => @playlists.id), :remote => true %>
 <% end %>

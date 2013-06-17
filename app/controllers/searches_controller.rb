@@ -24,8 +24,8 @@ class SearchesController < ApplicationController
         data[:norm_url] = "http://www.youtube.com/watch?v=" + elem.media_content[0].url.split("?")[0].split("/").last
         data[:url] = elem.media_content[0].url rescue nil
         data[:thumb_url] = elem.thumbnails[0].url
-        data[:width] = 600
-        data[:height] = 315 * 600/560
+        data[:width] = 560
+        data[:height] = 315 
         @ret << data
       end
       
@@ -38,8 +38,8 @@ class SearchesController < ApplicationController
         data[:norm_url] = "https://vimeo.com/" + elem["id"]
         data[:url] = "http://player.vimeo.com/video/" + elem["id"] rescue nil
         data[:thumb_url] = video.get_thumbnail_urls(elem["id"])["thumbnails"]["thumbnail"][0]["_content"]
-        data[:width] = 600
-        data[:height] = 281 * 600/500
+        data[:width] = 560
+        data[:height] = 281 * 560/500
         @ret << data
       end
 
@@ -66,8 +66,8 @@ class SearchesController < ApplicationController
         data[:norm_url] = "http://www.metacafe.com/watch/" + + item.at('.ItemTitle a')[:href].split("/")[2] rescue nil
         data[:url] = "http://www.metacafe.com/embed/" + item.at('.ItemTitle a')[:href].split("/")[2]
         data[:thumb_url] = item.at('img')[:src]
-        data[:width] = 600
-        data[:height] = 248 * 600/440
+        data[:width] = 560
+        data[:height] = 248 * 560/440
         @ret << data
       end
       @ret = @ret[0..@page_results-1]
@@ -96,8 +96,8 @@ class SearchesController < ApplicationController
         data[:norm_url] = item.at('a')[:href]
         data[:url] = "http://mediaservices.myspace.com/services/media/embed.aspx/m=" + item.at('a')[:href].split("/").last + ",t=1,mt=video"
         data[:thumb_url] = item.at('a img')[:src]
-        data[:width] = 600
-        data[:height] = 360 * 600/425
+        data[:width] = 560
+        data[:height] = 360 * 560/425
         @ret << data
       end
       @ret = @ret[0..@page_results-1]
@@ -157,8 +157,8 @@ class SearchesController < ApplicationController
         data[:norm_url] = item.at(id)[:href]
         data[:url] = "http://www.veoh.com/static/swf/veoh/SPL.swf?version=AFrontend.5.7.0.1396&permalinkId=" + item.at(id)[:href].split("/").last + "&player=videodetailsembedded&videoAutoPlay=0&id=anonymous"
         data[:thumb_url] = item.at(id + ' img')[:src] rescue nil
-        data[:width] = 600
-        data[:height] = 341 * 600/410
+        data[:width] = 560
+        data[:height] = 341 * 560/410
         @ret << data
         count += 1
       end
@@ -195,18 +195,17 @@ class SearchesController < ApplicationController
     @ret = @ret[0..@page_results-1]
 =end
     else 
-      embedly_api = Embedly::API.new :key => '1e88dffcdc9d40809a8dba052025f927',
-        :user_agent => 'Mozilla/5.0 (compatible; mytestapp/1.0; karanchitnis92@gmail.com)'
+      embedly_api = Embedly::API.new :key => '1e88dffcdc9d40809a8dba052025f927', :user_agent => 'Mozilla/5.0 (compatible; mytestapp/1.0; karanchitnis92@gmail.com)'
 
-      obj = embedly_api.oembed :url => params[:search], :maxwidth => 600
+      obj = embedly_api.oembed :url => params[:search], :maxwidth => 560
       if obj[0].error_code != 400
         
         #current_user.update_attribute :last_click_url, params[:search]
         @embed_title = obj[0].title
         @embed_norm_url = params[:search]
         @embed_thumbnail = obj[0].thumbnail_url
-        @embed_width = 600
-        @embed_height = (600/(obj[0].width)) * obj[0].height
+        @embed_width = 560
+        @embed_height = (560/(obj[0].width)) * obj[0].height
         @embed_provider = obj[0].provider_name
         @embed_link = obj[0].html
         
@@ -227,6 +226,7 @@ class SearchesController < ApplicationController
   end
 
   def send_vid_data
+
     if current_user.searches.size > 0
       current_user.searches.first.delete
     end
@@ -246,8 +246,11 @@ class SearchesController < ApplicationController
     elsif params[:init_chars] == "e:"
       text = '<embed src=' + "'" + params[:url] + "' " + 'type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width=' + "'" + params[:width] + "' " + "'" + 'height=' + "'" + params[:height] + "' " + 'id="veohFlashPlayerEmbed" name="veohFlashPlayerEmbed"></embed>'
       search_video.update_last_search(params[:title], params[:norm_url], params[:url], params[:thumb_url], params[:width], params[:height], "veoh", text)
-    
     end
-    render nothing: true
+    #File.open("testing1.txt", 'w') {|f| f.write(search_video.last_normurl) }
+    respond_to do |format|
+      format.html { redirect_to root_url }
+      format.js
+    end
   end
 end

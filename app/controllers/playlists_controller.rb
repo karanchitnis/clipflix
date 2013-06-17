@@ -36,13 +36,13 @@ class PlaylistsController < ApplicationController
         for vid in playlist_vids
           new_vid = new_playlist.videos.build
           title = vid.title
+          norm_url = "www.youtube.com/watch?v=" + vid.media_content[0].url.split('?')[0].split('/').last
           url = vid.media_content[0].url rescue nil
           thumb_url = vid.thumbnails[0].url
-          width = 600.to_s
-          height = 378.to_s
+          width = 560.to_s
+          height = 315.to_s
           embed = '<iframe width=' +  width + ' height=' + height + ' src=' + url + ' frameborder="0" allowfullscreen></iframe>'
-          new_vid.copy_vids(title, thumb_url, "Youtube", embed)
-          File.open('testing1.txt', 'w') { |f| f.write(embed) }
+          new_vid.copy_vids(title, norm_url, thumb_url, "Youtube", embed)
           startindex += 1
         end
       end
@@ -201,9 +201,7 @@ class PlaylistsController < ApplicationController
 
   def autocomplete_list
     @playlists = Playlist.order(:name).where("name like ?", "%#{params[:term]}%")
-
     @playlists = @playlists.where("privacy = 'Public'")
     render json: @playlists.map(&:name)
   end
-
 end

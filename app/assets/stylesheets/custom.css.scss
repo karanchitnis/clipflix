@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 1.7em;
+  font-size: 1.5em;
   margin-bottom: 15px;
 }
 
@@ -64,8 +64,9 @@ p {
 /* header */
 
 #logo {
-  position:relative;
+  position:absolute;
   float: left;
+  left: 100px;
   margin-right: 10px;
   font-size: 1.7em;
   color: white;
@@ -78,6 +79,11 @@ p {
     color: white;
     text-decoration: none;
   }
+}
+
+.nav {
+  position:absolute;
+  right:100px;
 }
 
 /* footer */
@@ -244,18 +250,44 @@ aside {
   border:3px solid green;
 }
 
+.span1 {
+}
+
 .span2 {
 }
 
 .span5 {
 }
 
+#main_and_search {
+  float: right;
+}
+
 .span3 {
-}  
+}
 
 .pad {
   padding-left: 7.5px;
 }
+
+
+.icon-arrow-up {
+  color: green;
+}
+
+.icon-arrow-down {
+  color: red;
+}
+
+.icon-pencil {
+  color: yellow;
+}
+
+.icon-remove {
+  color: red;
+}
+
+
 
 .row-fluid {
   /*background-color: rgb(240,240,240);*/
@@ -308,16 +340,16 @@ aside {
   *width: 33.263888888888886%;
 }
 .row-fluid.no-space .span3 {
-  width: 26.999999999999996%;
-  *width: 26.930555555555554%;
+  width: 26.699999999999996%;
+  *width: 26.630555555555554%;
 }
 
 /* ratio reduced for span2 */
 .row-fluid.no-space .span2 {
-  width: 14.666666666666664%;
-  *width: 14.59722222222222%;
+  width: 13.666666666666664%;
+  *width: 13.59722222222222%;
 }
 .row-fluid.no-space .span1 {
-  width: 8.333333333333332%;
-  *width: 8.263888888888888%;
+  width: 12.166666666666664%;
+  *width: 12.09722222222222%;
 }

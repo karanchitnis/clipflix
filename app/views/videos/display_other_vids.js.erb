@@ -1,1 +1,1 @@
-$("#other_list_content").html("<%= escape_javascript(render(:partial => "other_index", :locals => {:other_vids => @other_vids})) %>");
+$("#other_list_content").html("<%= j(render(:partial => "other_index", :locals => {:other_vids => @other_vids})) %>");

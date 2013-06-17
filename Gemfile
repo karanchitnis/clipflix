@@ -23,6 +23,7 @@ gem 'acts_as_list'
 gem 'acts_as_votable'
 gem 'koala'
 gem 'viddl-rb'
+gem 'font-awesome-rails'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'

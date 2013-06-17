@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :name, :email, :password, :password_confirmation, :provider, :uid, :oauth_token, :oauth_expires_at,
-                  :num_vids, :last_psearch
+  attr_accessible :name, :email, :password, :password_confirmation, :provider, :uid, :oauth_token, :oauth_expires_at, :num_vids
   
   #has_secure_password
   attr_accessor :password

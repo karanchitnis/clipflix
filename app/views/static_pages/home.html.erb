@@ -1,4 +1,5 @@
 </div>
+
 <% if signed_in? %>
 
 <!--script src="assets/karan.js"></script>
@@ -12,7 +13,7 @@
 
   <div class="row-fluid no-space">
     <div class="pad">
-    <div class="span2">
+    <div class="span1">
       <%= render 'shared/user_info' %>
       <%= render 'shared/stats' %>
 
@@ -21,11 +22,18 @@
     </div>
     <div class="span5">
       <div id="main_and_search">
-        <div id="main_vid_title"></div>
-        <div id="main_vid"></div>
+        <div id="main_vid_title">
+          <%= render "shared/init_title" %>
+        </div>
+        <div id="main_vid">
+          <%= render "shared/init_video" %>
+        </div>
       </div>
-
         <%= render 'shared/sub_items' %>
+      <script>
+        if( $.trim( $('#main_and_search').html() ).length )
+          document.getElementById("vid_items").style.display="inline";
+      </script>
     </div>
     <div class="span2">
       <%= render 'playlists/new' %>
@@ -42,10 +50,6 @@
     </div>
   </div>
 
-
-
-      <%#= render 'shared/feed' %>
-      <%#= render 'shared/init_video' %>
 <% else %>
   <div class="center hero-unit">
     <h1>Analyticsja</h1>
