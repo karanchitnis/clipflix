@@ -3,7 +3,12 @@ class VideosController < ApplicationController
   def download
     agent = Mechanize.new
     agent.pluggable_parser.default = Mechanize::Download
-    agent.get(ViddlRb.get_urls(current_user.searches.last.last_normurl).first).save_as(current_user.searches.last.last_title + '.mp4')
+    #agent.get(ViddlRb.get_urls(current_user.searches.last.last_normurl).first).save_as(current_user.searches.last.last_title + '.mp4')
+    ViddlRb.get_urls(current_user.searches.last.last_normurl).first
+    respond_to do |format|
+      format.html { redirect_to root_url }
+      format.js
+    end
   end
 
   def search_to_list
