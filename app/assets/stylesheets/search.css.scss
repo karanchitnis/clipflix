@@ -1,0 +1,19 @@
+// Place all the styles related to the Search controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#search_norm {
+	width: 95%;
+}
+
+#quick_but {
+	position: absolute;
+	right: 1px;
+	top:60px;
+	background-color: blue;
+	height:20px;
+}
+
+#input {
+	height: 27px;
+}

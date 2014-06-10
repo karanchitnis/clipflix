@@ -1,0 +1,13 @@
+<%= form_tag searches_path, :method => 'get', :remote => true do %>
+    <div class="field" id="search_norm">
+	  <%= text_field_tag :search, nil, id: "input", placeholder: "Quick Search: Enter URL of Video" %> 
+	  (Or y:search, v:search, m:search, s:search, e:search to search youtube, vimeo, metacafe, myspace, and veoh respectively. i.e: y:weeknd)
+	</br>
+<div id="quick_but">
+<%= button_tag(:type => 'submit', :class => 'btn btn-primary btn-small') do %>
+	<i class="icon-search icon-white"></i>
+<% end %>
+</div>
+
+    </div>
+<% end %>

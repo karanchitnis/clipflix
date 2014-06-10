@@ -1,0 +1,71 @@
+</div>
+
+<% if signed_in? %>
+
+<!--script src="assets/karan.js"></script>
+
+<div id="leftbox" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+<div id="rightbox">
+<%#= link_to image_tag("http://i2.ytimg.com/vi/etRLdSUSkaY/hqdefault.jpg", :size => "120x90"), "#" %>
+</div>-->
+
+<%#= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
+
+  <div class="row-fluid no-space">
+    <div class="pad">
+    <div class="span1">
+      <%= render 'shared/user_info' %>
+      <%= render 'shared/stats' %>
+
+       <!-- <br> Activity Feed (TODO) <br> Track Updates (TODO) <br> Most Popular (TODO) <br> Suggestions (TODO) <br>-->
+    </div>
+    </div>
+    <div class="span5">
+      <div id="main_and_search">
+        <div id="main_vid_title">
+          <%= render "shared/init_title" %>
+        </div>
+        <div id="main_vid">
+          <%= render "shared/init_video" %>
+        </div>
+      </div>
+        <%= render 'shared/sub_items' %>
+      <script>
+        if( $.trim( $('#main_and_search').html() ).length )
+          document.getElementById("vid_items").style.display="inline";
+      </script>
+    </div>
+    <div class="span2">
+      <%= render 'playlists/new' %>
+      <%= render 'playlists/index' %>
+    </div>
+    <div class="span3" id="sug_vids">    
+      <div id="search_bar">
+        <%= render 'searches/search' %>
+        <div id="suggestions"></div>
+        <div id="list_content">
+          <%= render 'shared/init_list' %>
+        </div>
+      </div> 
+    </div>
+  </div>
+
+<% else %>
+  <div class="center hero-unit">
+    <h1>Clipflix</h1>
+    <p>
+      Share, track, and create playlists of your favorite digital content
+    </p>
+    <div id="fb-root"></div>
+    <script src="assets/facebook_like.js"></script>
+
+    <div class="fb-like" data-href="http://localhost:3000" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div>
+
+    <%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+    <%= link_to "Sign in with Facebook", "/auth/facebook/" %>
+    <%= link_to "Sign in with Twitter", "/auth/twitter/" %>
+    <%= link_to "Sign in with Google", "/auth/google_oauth2/" %>
+
+  </div>
+
+<% end %>

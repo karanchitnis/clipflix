@@ -1,0 +1,7 @@
+<% if current_user.playlists.where(:cur_play => true).first != nil %>
+	<% if current_user.playlists.where(:cur_play => true).first.videos.where(:cur_vid => true).first != nil %>
+		<%= current_user.playlists.where(:cur_play => true).first.videos.where(:cur_vid => true).first.embed.html_safe %>
+	<% end %>
+<% elsif current_user.searches.last != nil %>
+	<%= current_user.searches.last.last_embed.html_safe %>
+<% end %>

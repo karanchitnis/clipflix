@@ -1,0 +1,6 @@
+<%= form_for(:playlist, :url => { :controller => 'playlists', :action => 'edit' }, :remote => true) do |f| %>
+  <div class="field">
+    <%= f.text_field :name, :placeholder => "Edit Name of Playlist" %>
+    <%= f.submit %>
+  </div>
+<% end %>

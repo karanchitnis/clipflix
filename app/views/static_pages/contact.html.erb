@@ -1,0 +1,19 @@
+<% provide(:title, 'Contact') %>
+<h1>Contact</h1>
+<p>
+  <%= form_for(@static_page) do |f| %>
+	<div class="field">
+	  Your Email <br /><br />
+	  <%= f.text_field :from%>
+	</div>
+	<div class="field">
+	  Subject (optional) <br /><br />
+	  <%= f.text_field :subject %>
+	</div>
+	<div class="field">
+	  Message <br /><br />
+	  <%= f.text_area :body, :rows => 6 %>
+	</div>
+	  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+  <% end %>
+</p>

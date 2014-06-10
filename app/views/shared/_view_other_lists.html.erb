@@ -1,0 +1,23 @@
+<div id="other_playlists">
+<% if current_user.following?(@user) %>
+	<% @user.playlists.order("position").where("privacy = 'Public' OR privacy = 'Only Friends'").each do |playlist| %>
+		<%= playlist.likes.size %>
+	    <%= link_to "Likes", like_path(:id => playlist.id), :remote => true %>
+	    <%= playlist.dislikes.size %>
+	    <%= link_to "Dislikes", dislike_path(:id => playlist.id), :remote => true %>
+		<%= link_to playlist.name, display_other_vids_path(:id => playlist.id), :remote => true %>
+		<%= link_to "Add", transfer_list_path(:id => playlist.id), :remote => true %>
+		</br>
+	<% end %>
+<% else %>
+	<% @user.playlists.order("position").where("privacy = 'Public'").each do |playlist| %>
+		<%= playlist.likes.size %>
+	    <%= link_to "Likes", like_path(:id => playlist.id), :remote => true %>
+	    <%= playlist.dislikes.size %>
+	    <%= link_to "Dislikes", dislike_path(:id => playlist.id), :remote => true %>
+		<%= link_to playlist.name, display_other_vids_path(:id => playlist.id), :remote => true %>
+		<%= link_to "Add", transfer_list_path(:id => playlist.id), :remote => true %>
+		</br>
+	<% end %>
+<% end %>
+</div>

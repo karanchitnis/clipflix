@@ -1,0 +1,6 @@
+
+<% current_user.playlists.each do |playlist| %>
+
+  <%= button_to playlist.name, search_to_list_path(:id => playlist.id), :remote => true %>
+
+<% end %>

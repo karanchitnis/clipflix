@@ -1,0 +1,12 @@
+<script src="assets/auto.js"></script>
+
+<%= form_tag playlists_path, :method => 'get', :remote => true do %>
+
+  <div class="field" id="playlist_name">
+    <%= text_field_tag :name, nil, id: "play_search", data: {autocomplete_source: autocomplete_list_path}, :placeholder => "Search for Playlists" %><br />
+  </div>
+  <div class="actions">
+    <%= submit_tag "Search", class: "btn btn-large btn-primary" %>
+  </div>
+<% end %>
+

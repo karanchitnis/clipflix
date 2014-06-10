@@ -1,0 +1,15 @@
+<div id="new_list_but">
+<%= button_to "New Playlist", "#", class: "btn", :remote => true %>
+
+<%= form_for(:playlist, :url => { :controller => 'playlists', :action => 'create' }, :remote => true) do |f| %>
+</div>
+  <div class="field" id="new_playlist" style="display:none;">
+    <%= f.text_field :name, :placeholder => "Enter Name of Playlist" %>
+    <%= f.submit 'Submit', class: "btn" %>
+  </div>
+<% end %>
+<script>
+  $("#new_list_but").click(function() { 
+      $("#new_playlist").toggle();
+  });
+</script>

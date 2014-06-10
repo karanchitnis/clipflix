@@ -1,0 +1,30 @@
+<head>
+<script>var switchTo5x=true;</script>
+<script src="http://w.sharethis.com/button/buttons.js"></script>
+<script>stLight.options({publisher: "4f4616df-2d9a-4902-a8a8-6032edfbc1e3", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+</head>
+
+<% if current_user.searches.last != nil && current_user.searches.last.last_normurl != nil && current_user.searches.last.last_title != nil  %>
+
+	<%= link_to image_tag("facebook-share.png"), "https://www.facebook.com/sharer/sharer.php?u=#{current_user.searches.last.last_normurl}", :target => "_blank" %>
+
+	<%= link_to image_tag("twitter-share.png"), "https://twitter.com/share?url="+current_user.searches.last.last_normurl + '&text=' + current_user.searches.last.last_title + '&via=' + "Analyticsja", :target => "_blank" %>
+
+	<a href="https://plus.google.com/share?url= <%= current_user.searches.last.last_normurl %>" target="_blank"> <%= image_tag ("googleplus-share.png") %> </a>
+
+	<a href="http://www.tumblr.com/share/video?embed=<%=u current_user.searches.last.last_normurl %>&caption=<%=u current_user.searches.last.last_title %> + via Analyticsja" target="_blank"> <%= image_tag ("tumblr-share.png") %> </a>
+
+	<a href="//pinterest.com/pin/create/button/" data-pin-do="buttonBookmark"> <%= image_tag("pinterest-share.png") %> </a>
+	<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+
+	<script type="text/javascript">
+	  reddit_url = "<%= j(current_user.searches.last.last_normurl) %>";
+	  reddit_title = "<%= j(current_user.searches.last.last_title) %>" + " via Analyticsja";
+	  reddit_newwindow ='1'
+	</script>
+	<script type="text/javascript" src="http://www.reddit.com/static/button/button3.js"></script>
+
+	<!--span class='st_reddit_large' displayText='Reddit'></span-->
+
+	<span class='st_linkedin_large' displayText='LinkedIn'></span>
+<% end %>

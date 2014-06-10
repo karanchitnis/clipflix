@@ -1,0 +1,351 @@
+<% if @ret == [] %>
+	$('#main_vid_title').html("<%= j(@embed_title.html_safe) %>");
+	$('#main_vid').html("<%= j(@embed_link.html_safe) %>");
+	$("#share_buttons").html("<%= j(render(:partial => "shared/share_buttons")) %>");
+	$("#vid_items").show();
+	
+<% else %>
+	var list_toggle = document.getElementById("list_content");
+		list_toggle.style.display = 'none';
+	var sug_toggle = document.getElementById("suggestions");
+		sug_toggle.style.display = 'inline';
+	var x = document.getElementById("suggestions0");
+	if (x == null) {
+		<%= ind = 0 %>
+		<% while (ind < @ret.length ) %>
+		    $('#suggestions').append('<div id="suggestions' + <%= ind %> + '"><%= link_to image_tag(@ret[ind][:thumb_url], :size => "120x90"), "#", :onclick => "set_sug_vid();" %><%= link_to @ret[ind][:title], "#", :onclick => "set_sug_vid();" %></div>' );
+			<%= ind += 1 %>
+		<% end %>
+	}
+	else {
+		<%= ind = 0 %>
+		<% while (ind < @ret.length ) %>
+		    $('#suggestions' + <%= ind %>).replaceWith('<div id="suggestions' + <%= ind %> + '"><%= link_to image_tag(@ret[ind][:thumb_url], :size => "120x90"), "#", :onclick => "set_sug_vid();" %><%= link_to @ret[ind][:title], "#", :onclick => "set_sug_vid();" %></div>' );
+		    <%= ind += 1 %>
+		<% end %>
+	}
+
+function set_sug_vid() {
+
+/*
+	var index = 0;
+	<%= @pos = 0 %>
+	var init_id = '#suggestions';
+	while (index < 15) {
+		var sugg_id = init_id + index.toString();
+		$(sugg_id).click(function() {
+			$("#main_vid").html("<%= j(render(:partial => "sug_vid", :locals => {:url => @ret[@pos][:url], :width => @ret[@pos][:width], :height => @ret[@pos][:height], :type => @init_chars, :title => @ret[@pos][:title]})) %>");
+			$("#main_vid_title").html("<%= j(@ret[@pos][:title]) %>");
+			$("#vid_items").show();
+
+			$.ajax(
+		    {
+		      type:'POST',
+		      url:'/ajax/send_vid_data',
+		      data: 'title=' + "<%= j(@ret[@pos][:title]) %>" 
+		      	+ '&norm_url=' + "<%= j(@ret[@pos][:norm_url]) %>" 
+		      	+ '&url=' + "<%= j(@ret[@pos][:url]) %>" 
+		      	+ '&thumb_url=' + "<%= j(@ret[@pos][:thumb_url]) %>" 
+		      	+ '&width=' + "<%= j(@ret[@pos][:width].to_s) %>" 
+		      	+ '&height=' + "<%= j(@ret[@pos][:height].to_s) %>"
+		    	+ '&init_chars=' + "<%= j(@init_chars) %>"
+		    });
+		})
+		index += 1;
+		<%= @pos += 1 %>
+	}
+*/
+
+	$('#suggestions0').click(function(){
+		//alert("<%= j(@ret[0][:norm_url]) %>");
+	    $("#main_vid").html("<%= j(render(:partial => "sug_vid", :locals => {:url => @ret[0][:url], :width => @ret[0][:width], :height => @ret[0][:height], :type => @init_chars, :title => @ret[0][:title]})) %>");
+		$("#main_vid_title").html("<%= j(@ret[0][:title]) %>");
+
+		$.ajax(
+	    {
+	      type:'POST',
+	      url:'/ajax/send_vid_data',
+	      data: 'title=' + "<%= j(@ret[0][:title]) %>" 
+	      	+ '&norm_url=' + "<%= j(@ret[0][:norm_url]) %>" 
+	      	+ '&url=' + "<%= j(@ret[0][:url]) %>" 
+	      	+ '&thumb_url=' + "<%= j(@ret[0][:thumb_url]) %>" 
+	      	+ '&width=' + "<%= j(@ret[0][:width].to_s) %>"
+	      	+ '&height=' + "<%= j(@ret[0][:height].to_s) %>"
+	    	+ '&init_chars=' + "<%= j(@init_chars) %>"
+	    })
+	    //  .done(function() {
+	    //	$("#share_buttons").html("<%= j(render(:partial => "shared/share_buttons")) %>");
+		//	$("#vid_items").show();
+		//});
+	});
+	$('#suggestions1').click(function(){
+	    $("#main_vid").html("<%= j(render(:partial => "sug_vid", :locals => {:url => @ret[1][:url], :width => @ret[1][:width], :height => @ret[1][:height], :type => @init_chars, :title => @ret[1][:title]})) %>");
+		$("#main_vid_title").html("<%= j(@ret[1][:title]) %>");
+		
+		$.ajax(
+	    {
+	      type:'POST',
+	      url:'/ajax/send_vid_data',
+	      data: 'title=' + "<%= j(@ret[1][:title]) %>" 
+	      	+ '&norm_url=' + "<%= j(@ret[1][:norm_url]) %>" 
+	      	+ '&url=' + "<%= j(@ret[1][:url]) %>" 
+	      	+ '&thumb_url=' + "<%= j(@ret[1][:thumb_url]) %>" 
+	      	+ '&width=' + "<%= j(@ret[1][:width].to_s) %>" 
+	      	+ '&height=' + "<%= j(@ret[1][:height].to_s) %>"
+	    	+ '&init_chars=' + "<%= j(@init_chars) %>"
+	    })
+	    //.done(function() {
+	    //	$("#share_buttons").html("<%= j(render(:partial => "shared/share_buttons")) %>");
+		//	$("#vid_items").show();
+		//});
+	});
+	$('#suggestions2').click(function(){
+	    $("#main_vid").html("<%= j(render(:partial => "sug_vid", :locals => {:url => @ret[2][:url], :width => @ret[2][:width], :height => @ret[2][:height], :type => @init_chars, :title => @ret[2][:title]})) %>");
+		$("#main_vid_title").html("<%= j(@ret[2][:title]) %>");
+		$("#share_buttons").html("<%= j(render(:partial => "shared/share_buttons")) %>");
+		$("#vid_items").show();
+		$.ajax(
+	    {
+	      type:'POST',
+	      url:'/ajax/send_vid_data',
+	      data: 'title=' + "<%= j(@ret[2][:title]) %>" 
+	      	+ '&norm_url=' + "<%= j(@ret[2][:norm_url]) %>" 
+	      	+ '&url=' + "<%= j(@ret[2][:url]) %>" 
+	      	+ '&thumb_url=' + "<%= j(@ret[2][:thumb_url]) %>" 
+	      	+ '&width=' + "<%= j(@ret[2][:width].to_s) %>" 
+	      	+ '&height=' + "<%= j(@ret[2][:height].to_s) %>"
+	      	+ '&init_chars=' + "<%= j(@init_chars) %>"
+	    });
+	});
+	$('#suggestions3').click(function(){
+	    $("#main_vid").html("<%= j(render(:partial => "sug_vid", :locals => {:url => @ret[3][:url], :width => @ret[3][:width], :height => @ret[3][:height], :type => @init_chars, :title => @ret[3][:title]})) %>");
+		$("#main_vid_title").html("<%= j(@ret[3][:title]) %>");
+		$("#share_buttons").html("<%= j(render(:partial => "shared/share_buttons")) %>");
+		$("#vid_items").show();
+		$.ajax(
+	    {
+	      type:'POST',
+	      url:'/ajax/send_vid_data',
+	      data: 'title=' + "<%= j(@ret[3][:title]) %>" 
+	      	+ '&norm_url=' + "<%= j(@ret[3][:norm_url]) %>" 
+	      	+ '&url=' + "<%= j(@ret[3][:url]) %>" 
+	      	+ '&thumb_url=' + "<%= j(@ret[3][:thumb_url]) %>" 
+	      	+ '&width=' + "<%= j(@ret[3][:width].to_s) %>" 
+	      	+ '&height=' + "<%= j(@ret[3][:height].to_s) %>"
+	    	+ '&init_chars=' + "<%= j(@init_chars) %>"
+
+	    });
+	});
+	$('#suggestions4').click(function(){
+	    $("#main_vid").html("<%= j(render(:partial => "sug_vid", :locals => {:url => @ret[4][:url], :width => @ret[4][:width], :height => @ret[4][:height], :type => @init_chars, :title => @ret[4][:title]})) %>");
+		$("#main_vid_title").html("<%= j(@ret[4][:title]) %>");
+		$("#share_buttons").html("<%= j(render(:partial => "shared/share_buttons")) %>");
+		$("#vid_items").show();
+		$.ajax(
+	    {
+	      type:'POST',
+	      url:'/ajax/send_vid_data',
+	      data: 'title=' + "<%= j(@ret[4][:title]) %>" 
+	      	+ '&norm_url=' + "<%= j(@ret[4][:norm_url]) %>" 
+	      	+ '&url=' + "<%= j(@ret[4][:url]) %>" 
+	      	+ '&thumb_url=' + "<%= j(@ret[4][:thumb_url]) %>" 
+	      	+ '&width=' + "<%= j(@ret[4][:width].to_s) %>" 
+	      	+ '&height=' + "<%= j(@ret[4][:height].to_s) %>"
+	    	+ '&init_chars=' + "<%= j(@init_chars) %>"
+
+	    });
+	});
+	$('#suggestions5').click(function(){
+	    $("#main_vid").html("<%= j(render(:partial => "sug_vid", :locals => {:url => @ret[5][:url], :width => @ret[5][:width], :height => @ret[5][:height], :type => @init_chars, :title => @ret[5][:title]})) %>");
+		$("#main_vid_title").html("<%= j(@ret[5][:title]) %>");
+		$("#share_buttons").html("<%= j(render(:partial => "shared/share_buttons")) %>");
+		$("#vid_items").show();
+		$.ajax(
+	    {
+	      type:'POST',
+	      url:'/ajax/send_vid_data',
+	      data: 'title=' + "<%= j(@ret[5][:title]) %>" 
+	      	+ '&norm_url=' + "<%= j(@ret[5][:norm_url]) %>" 
+	      	+ '&url=' + "<%= j(@ret[5][:url]) %>" 
+	      	+ '&thumb_url=' + "<%= j(@ret[5][:thumb_url]) %>" 
+	      	+ '&width=' + "<%= j(@ret[5][:width].to_s) %>" 
+	      	+ '&height=' + "<%= j(@ret[5][:height].to_s) %>"
+	    	+ '&init_chars=' + "<%= j(@init_chars) %>"
+
+	    });
+	});
+	$('#suggestions6').click(function(){
+	    $("#main_vid").html("<%= j(render(:partial => "sug_vid", :locals => {:url => @ret[6][:url], :width => @ret[6][:width], :height => @ret[6][:height], :type => @init_chars, :title => @ret[6][:title]})) %>");
+		$("#main_vid_title").html("<%= j(@ret[6][:title]) %>");
+		$("#share_buttons").html("<%= j(render(:partial => "shared/share_buttons")) %>");
+		$("#vid_items").show();
+		$.ajax(
+	    {
+	      type:'POST',
+	      url:'/ajax/send_vid_data',
+	      data: 'title=' + "<%= j(@ret[6][:title]) %>" 
+	      	+ '&norm_url=' + "<%= j(@ret[6][:norm_url]) %>" 
+	      	+ '&url=' + "<%= j(@ret[6][:url]) %>" 
+	      	+ '&thumb_url=' + "<%= j(@ret[6][:thumb_url]) %>" 
+	      	+ '&width=' + "<%= j(@ret[6][:width].to_s) %>" 
+	      	+ '&height=' + "<%= j(@ret[6][:height].to_s) %>"
+	    	+ '&init_chars=' + "<%= j(@init_chars) %>"
+
+	    });
+	});
+	$('#suggestions7').click(function(){
+	    $("#main_vid").html("<%= j(render(:partial => "sug_vid", :locals => {:url => @ret[7][:url], :width => @ret[7][:width], :height => @ret[7][:height], :type => @init_chars, :title => @ret[7][:title]})) %>");
+		$("#main_vid_title").html("<%= j(@ret[7][:title]) %>");
+		$("#share_buttons").html("<%= j(render(:partial => "shared/share_buttons")) %>");
+		$("#vid_items").show();
+		$.ajax(
+	    {
+	      type:'POST',
+	      url:'/ajax/send_vid_data',
+	      data: 'title=' + "<%= j(@ret[7][:title]) %>" 
+	      	+ '&norm_url=' + "<%= j(@ret[7][:norm_url]) %>" 
+	      	+ '&url=' + "<%= j(@ret[7][:url]) %>" 
+	      	+ '&thumb_url=' + "<%= j(@ret[7][:thumb_url]) %>" 
+	      	+ '&width=' + "<%= j(@ret[7][:width].to_s) %>" 
+	      	+ '&height=' + "<%= j(@ret[7][:height].to_s) %>"
+	    	+ '&init_chars=' + "<%= j(@init_chars) %>"
+
+	    });
+	});
+	$('#suggestions8').click(function(){
+	    $("#main_vid").html("<%= j(render(:partial => "sug_vid", :locals => {:url => @ret[8][:url], :width => @ret[8][:width], :height => @ret[8][:height], :type => @init_chars, :title => @ret[8][:title]})) %>");
+		$("#main_vid_title").html("<%= j(@ret[8][:title]) %>");
+		$("#share_buttons").html("<%= j(render(:partial => "shared/share_buttons")) %>");
+		$("#vid_items").show();
+		$.ajax(
+	    {
+	      type:'POST',
+	      url:'/ajax/send_vid_data',
+	      data: 'title=' + "<%= j(@ret[8][:title]) %>" 
+	      	+ '&norm_url=' + "<%= j(@ret[8][:norm_url]) %>" 
+	      	+ '&url=' + "<%= j(@ret[8][:url]) %>" 
+	      	+ '&thumb_url=' + "<%= j(@ret[8][:thumb_url]) %>" 
+	      	+ '&width=' + "<%= j(@ret[8][:width].to_s) %>" 
+	      	+ '&height=' + "<%= j(@ret[8][:height].to_s) %>"
+	    	+ '&init_chars=' + "<%= j(@init_chars) %>"
+
+	    });
+	});
+	$('#suggestions9').click(function(){
+	    $("#main_vid").html("<%= j(render(:partial => "sug_vid", :locals => {:url => @ret[9][:url], :width => @ret[9][:width], :height => @ret[9][:height], :type => @init_chars, :title => @ret[9][:title]})) %>");
+		$("#main_vid_title").html("<%= j(@ret[9][:title]) %>");
+		$("#share_buttons").html("<%= j(render(:partial => "shared/share_buttons")) %>");
+		$("#vid_items").show();
+		$.ajax(
+	    {
+	      type:'POST',
+	      url:'/ajax/send_vid_data',
+	      data: 'title=' + "<%= j(@ret[9][:title]) %>" 
+	      	+ '&norm_url=' + "<%= j(@ret[9][:norm_url]) %>" 
+	      	+ '&url=' + "<%= j(@ret[9][:url]) %>" 
+	      	+ '&thumb_url=' + "<%= j(@ret[9][:thumb_url]) %>" 
+	      	+ '&width=' + "<%= j(@ret[9][:width].to_s) %>" 
+	      	+ '&height=' + "<%= j(@ret[9][:height].to_s) %>"
+	    	+ '&init_chars=' + "<%= j(@init_chars) %>"
+
+	    });
+	});
+	$('#suggestions10').click(function(){
+	    $("#main_vid").html("<%= j(render(:partial => "sug_vid", :locals => {:url => @ret[10][:url], :width => @ret[10][:width], :height => @ret[10][:height], :type => @init_chars, :title => @ret[10][:title]})) %>");
+		$("#main_vid_title").html("<%= j(@ret[10][:title]) %>");
+		$("#share_buttons").html("<%= j(render(:partial => "shared/share_buttons")) %>");
+		$("#vid_items").show();
+		$.ajax(
+	    {
+	      type:'POST',
+	      url:'/ajax/send_vid_data',
+	      data: 'title=' + "<%= j(@ret[10][:title]) %>" 
+	      	+ '&norm_url=' + "<%= j(@ret[10][:norm_url]) %>" 
+	      	+ '&url=' + "<%= j(@ret[10][:url]) %>" 
+	      	+ '&thumb_url=' + "<%= j(@ret[10][:thumb_url]) %>" 
+	      	+ '&width=' + "<%= j(@ret[10][:width].to_s) %>" 
+	      	+ '&height=' + "<%= j(@ret[10][:height].to_s) %>"
+	    	+ '&init_chars=' + "<%= j(@init_chars) %>"
+
+	    });
+	});
+	
+	$('#suggestions11').click(function(){
+	    $("#main_vid").html("<%= j(render(:partial => "sug_vid", :locals => {:url => @ret[11][:url], :width => @ret[11][:width], :height => @ret[11][:height], :type => @init_chars, :title => @ret[11][:title]})) %>");
+		$("#main_vid_title").html("<%= j(@ret[11][:title]) %>");
+		$("#share_buttons").html("<%= j(render(:partial => "shared/share_buttons")) %>");
+		$("#vid_items").show();
+		$.ajax(
+	    {
+	      type:'POST',
+	      url:'/ajax/send_vid_data',
+	      data: 'title=' + "<%= j(@ret[11][:title]) %>" 
+	      	+ '&norm_url=' + "<%= j(@ret[11][:norm_url]) %>" 
+	      	+ '&url=' + "<%= j(@ret[11][:url]) %>" 
+	      	+ '&thumb_url=' + "<%= j(@ret[11][:thumb_url]) %>" 
+	      	+ '&width=' + "<%= j(@ret[11][:width].to_s) %>" 
+	      	+ '&height=' + "<%= j(@ret[11][:height].to_s) %>"
+	    	+ '&init_chars=' + "<%= j(@init_chars) %>"
+
+	    });
+	});
+	$('#suggestions12').click(function(){
+	    $("#main_vid").html("<%= j(render(:partial => "sug_vid", :locals => {:url => @ret[12][:url], :width => @ret[12][:width], :height => @ret[12][:height], :type => @init_chars, :title => @ret[12][:title]})) %>");
+		$("#main_vid_title").html("<%= j(@ret[12][:title]) %>");
+		$("#share_buttons").html("<%= j(render(:partial => "shared/share_buttons")) %>");
+		$("#vid_items").show();
+		$.ajax(
+	    {
+	      type:'POST',
+	      url:'/ajax/send_vid_data',
+	      data: 'title=' + "<%= j(@ret[12][:title]) %>" 
+	      	+ '&norm_url=' + "<%= j(@ret[12][:norm_url]) %>" 
+	      	+ '&url=' + "<%= j(@ret[12][:url]) %>" 
+	      	+ '&thumb_url=' + "<%= j(@ret[12][:thumb_url]) %>" 
+	      	+ '&width=' + "<%= j(@ret[12][:width].to_s) %>" 
+	      	+ '&height=' + "<%= j(@ret[12][:height].to_s) %>"
+	    	+ '&init_chars=' + "<%= j(@init_chars) %>"
+
+	    });
+	});
+	$('#suggestions13').click(function(){
+	    $("#main_vid").html("<%= j(render(:partial => "sug_vid", :locals => {:url => @ret[13][:url], :width => @ret[13][:width], :height => @ret[13][:height], :type => @init_chars, :title => @ret[13][:title]})) %>");
+		$("#main_vid_title").html("<%= j(@ret[13][:title]) %>");
+		$("#share_buttons").html("<%= j(render(:partial => "shared/share_buttons")) %>");
+		$("#vid_items").show();
+		$.ajax(
+	    {
+	      type:'POST',
+	      url:'/ajax/send_vid_data',
+	      data: 'title=' + "<%= j(@ret[13][:title]) %>" 
+	      	+ '&norm_url=' + "<%= j(@ret[13][:norm_url]) %>" 
+	      	+ '&url=' + "<%= j(@ret[13][:url]) %>" 
+	      	+ '&thumb_url=' + "<%= j(@ret[13][:thumb_url]) %>" 
+	      	+ '&width=' + "<%= j(@ret[13][:width].to_s) %>" 
+	      	+ '&height=' + "<%= j(@ret[13][:height].to_s) %>"
+	    	+ '&init_chars=' + "<%= j(@init_chars) %>"
+
+	    });
+	});
+	$('#suggestions14').click(function(){
+	    $("#main_vid").html("<%= j(render(:partial => "sug_vid", :locals => {:url => @ret[14][:url], :width => @ret[14][:width], :height => @ret[14][:height], :type => @init_chars, :title => @ret[14][:title]})) %>");
+		$("#main_vid_title").html("<%= j(@ret[14][:title]) %>");
+		$("#share_buttons").html("<%= j(render(:partial => "shared/share_buttons")) %>");
+		$("#vid_items").show();
+		$.ajax(
+	    {
+	      type:'POST',
+	      url:'/ajax/send_vid_data',
+	      data: 'title=' + "<%= j(@ret[14][:title]) %>" 
+	      	+ '&norm_url=' + "<%= j(@ret[14][:norm_url]) %>" 
+	      	+ '&url=' + "<%= j(@ret[14][:url]) %>" 
+	      	+ '&thumb_url=' + "<%= j(@ret[14][:thumb_url]) %>" 
+	      	+ '&width=' + "<%= j(@ret[14][:width].to_s) %>" 
+	      	+ '&height=' + "<%= j(@ret[14][:height].to_s) %>"
+	    	+ '&init_chars=' + "<%= j(@init_chars) %>"
+
+	    });
+	});
+}
+
+<% end %>

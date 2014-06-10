@@ -1,0 +1,355 @@
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+
+$grayMediumLight: #eaeaea;
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* universal */
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 60px;
+}
+
+section {
+  overflow: auto;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.center {
+  text-align: center;
+  h1 {
+    margin-bottom: 10px;
+  }
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 1.7em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: $grayLight;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+
+/* header */
+
+#logo {
+  position:absolute;
+  float: left;
+  left: 100px;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  line-height: 1;
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.nav {
+  position:absolute;
+  right:100px;
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid $grayMediumLight;
+  color: $grayLight;
+  a {
+    color: $gray;
+    &:hover { 
+      color: $grayDarker;
+    }
+  }  
+  small { 
+    float: left; 
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 10px;
+    }
+  }
+}
+
+/* miscellaneous */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+
+/* sidebar */
+
+aside {
+  section {
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:first-child {
+      border: 0;
+      padding-top: 0;
+    }
+    span {
+      display: block;
+      margin-bottom: 3px;
+      line-height: 1;
+    }
+    h1 {
+      font-size: 1.6em;
+      text-align: left;
+      letter-spacing: -1px;
+      margin-bottom: 3px;
+    }
+  }
+}
+
+.stats {
+  a {
+    float: left;
+    padding: 0 10px;
+    border-left: 1px solid $grayLighter;
+    color: gray;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: $blue;
+    }
+  }
+  div {
+  padding-top: 5px;
+    float: left;
+  }
+  strong {
+    display: block;
+  }
+}
+
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+  @include box_sizing;  
+}
+
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .control-group;
+  @extend .error;
+}
+
+/* users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
+}
+
+/* microposts */
+
+.microposts {
+  list-style: none;
+  margin: 10px 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}
+.content {
+  display: block;
+}
+.timestamp {
+  color: $grayLight;
+}
+
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
+}
+
+#leftbox {
+  position:absolute;
+  float:left;
+  width:250px;
+  height:250px;
+  left:50px;
+  border:3px solid blue;
+}
+
+#rightbox {
+  float:right;
+  width:250px;
+  height:250px;
+  border:3px solid green;
+}
+
+.span1 {
+}
+
+.span2 {
+}
+
+.span5 {
+}
+
+#main_and_search {
+  float: right;
+}
+
+.span3 {
+}
+
+.pad {
+  padding-left: 7.5px;
+}
+
+
+.icon-arrow-up {
+  color: green;
+}
+
+.icon-arrow-down {
+  color: red;
+}
+
+.icon-pencil {
+  color: yellow;
+}
+
+.icon-remove {
+  color: red;
+}
+
+
+
+.row-fluid {
+  /*background-color: rgb(240,240,240);*/
+}
+
+.row-fluid.no-space [class*="span"] {
+  margin-left: 5px;
+  *margin-left: 5px;
+}
+.row-fluid.no-space [class*="span"]:first-child {
+  margin-left: 0;
+}
+.row-fluid.no-space .controls-row [class*="span"] + [class*="span"] {
+  margin-left: 0%;
+}
+.row-fluid.no-space .span12 {
+  width: 99.99999999999999%;
+  *width: 99.93055555555554%;
+}
+.row-fluid.no-space .span11 {
+  width: 91.66666666666666%;
+  *width: 91.59722222222221%;
+}
+.row-fluid.no-space .span10 {
+  width: 83.33333333333331%;
+  *width: 83.26388888888887%;
+}
+.row-fluid.no-space .span9 {
+  width: 74.99999999999999%;
+  *width: 74.93055555555554%;
+}
+.row-fluid.no-space .span8 {
+  width: 66.66666666666666%;
+  *width: 66.59722222222221%;
+}
+.row-fluid.no-space .span7 {
+  width: 58.33333333333333%;
+  *width: 58.263888888888886%;
+}
+.row-fluid.no-space .span6 {
+  width: 49.99999999999999%;
+  *width: 49.93055555555555%;
+}
+.row-fluid.no-space .span5 {
+  width: 42.16666666666666%;
+  *width: 42.097222222222214%;
+}
+.row-fluid.no-space .span4 {
+  width: 33.33333333333333%;
+  *width: 33.263888888888886%;
+}
+.row-fluid.no-space .span3 {
+  width: 26.699999999999996%;
+  *width: 26.630555555555554%;
+}
+
+/* ratio reduced for span2 */
+.row-fluid.no-space .span2 {
+  width: 13.666666666666664%;
+  *width: 13.59722222222222%;
+}
+.row-fluid.no-space .span1 {
+  width: 12.166666666666664%;
+  *width: 12.09722222222222%;
+}
